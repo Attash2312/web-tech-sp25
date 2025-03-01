@@ -3,7 +3,8 @@
 # Web Development Course – Attash Ul Wahab
 
 **Roll Number:** SP22-BSE-050  
-**Course Instructor:** Sir Usman Akram (Registered with BAI)
+**Course Instructor:** Sir Usman Akram 
+(Registered with BSAI)
 
 ## Repository Structure:
 

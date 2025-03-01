@@ -7,4 +7,18 @@
 
 ## Repository Structure:
 
-web-tech-sp25/ │ ├── Assignments/ │ ├── Assignment1/ │ ├── Assignment2/ │ ├── Assignment3/ │ ├── Assignment4/ │ ├── LabTasks/ │ ├── LabTask1/ │ ├── LabTask2/ │ ├── LabTask3/ │ ├── LabTask4/ │ ├── Exams/ │ ├── Midterm/ │ ├── Final/ │ └── README.md
+- **web-tech-sp25/**
+  - **Assignments/**
+    - **Assignment1/**
+    - **Assignment2/**
+    - **Assignment3/**
+    - **Assignment4/**
+  - **LabTasks/**
+    - **LabTask1/**
+    - **LabTask2/**
+    - **LabTask3/**
+    - **LabTask4/**
+  - **Exams/**
+    - **Midterm/**
+    - **Final/**
+  - **README.md**

@@ -1,0 +1,92 @@
+*{
+    background-color: white;
+    font-family: sans-serif;
+}
+header{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+    justify-content: space-between;
+}
+.mclogo{
+    border: 1px solid black;
+    height: 120px;
+    width: 120px;
+    margin-left: 50px;
+}
+.mclogo img{
+    width: 100%;
+    height: 100%;
+}
+
+header ul{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+.navbar{
+    border: 1px solid black;
+    width: 100%;
+}
+.upnav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px;
+    margin-left: 50px;
+    font-size: 16px;
+    font-weight: 500;
+    border: 1px solid black;
+}
+.upnav a{
+    text-decoration: none;
+    color: black;
+}
+.upln{
+    border: 1px solid black;
+    justify-content: space-between;
+    width: 350px;
+}
+.uprn{
+    margin: 10px;
+    border: 1px solid black;
+    justify-content: space-between;
+    width: 600px;
+    
+}
+.upnav button{
+    padding: 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    font-weight: 500;
+    
+}
+#srchbtn{
+    border: none;
+}
+#lctbtn{
+    border: none;
+}
+#ordrbtn{
+    border: none;
+    background-color: rgb(218, 218, 0);
+}
+header ul li{
+    margin: 10px;
+}
+.dnnav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px;
+    margin-left: 50px;
+    font-size: 16px;
+    font-weight: 500;
+    border: 1px solid black;
+}
+.dnnav a{
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    font-size: 18px;
+}

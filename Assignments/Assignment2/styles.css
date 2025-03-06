@@ -242,3 +242,17 @@ header ul li{
     margin-left: -40px;
     padding-bottom: 10px;
 }
+
+.badges{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 50px;
+    margin-right: 50px;
+    margin-left: 50px;
+    align-items: center;
+}
+.badges .social img{
+    width: 300px;
+    height: 100px;
+}

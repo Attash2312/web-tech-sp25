@@ -251,8 +251,56 @@ header ul li{
     margin-right: 50px;
     margin-left: 50px;
     align-items: center;
+    position: relative; /* Required for positioning the ::after element */
+    padding-bottom: 20px; /* Add space at the bottom for the divider */
+
 }
 .badges .social img{
     width: 300px;
     height: 100px;
+}
+.badges::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0%; /* Start 10% from the left */
+    width: 100%; /* 80% of the section width */
+    height: 1px; /* Thin line */
+    background-color: #ccc; /* Light gray color */
+}
+
+footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 30px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 50px;
+    align-items: center;
+  }
+  .ftleft{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+.ftright{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.ftleft ul{
+    list-style: none;
+    gap: 20px;
+}
+.ftleft a{
+    text-decoration: none;
+    color: black;
+    margin-right: 20px;
+}
+.ftright img{
+    width: 30px;
+    height: 30px;
 }

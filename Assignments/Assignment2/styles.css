@@ -34,7 +34,6 @@ header ul{
     margin-left: 10px;
     font-size: 16px;
     font-weight: 500;
-    margin-top: -15px;
 }
 .upnav a{
     text-decoration: none;
@@ -51,16 +50,20 @@ header ul{
     margin: 0px;
     justify-content: space-between;
     width: 600px;
-    align-items: center;
-    vertical-align: middle;
     
 }
 .upnav button{
-    padding: 20px;
+    padding: 10px 20px; /* Adjust padding for better spacing */
     font-size: 16px;
     border-radius: 5px;
     font-weight: 500;
-    
+    height: 40px; /* Increase height to accommodate padding and text */
+    text-align: center; /* Center text horizontally */
+    line-height: 20px; /* Match line-height to the text size for vertical centering */
+    display: flex; /* Use flexbox for easy centering */
+    align-items: center; /* Vertically center text */
+    justify-content: center; /* Horizontally center text */
+    border: none; /* Optional: Remove default button border */
 }
 #srchbtn{
     border: none;
@@ -84,7 +87,7 @@ header ul li{
     font-weight: 500;
     gap: 20px;
     margin-left: 10px;
-    margin-top: -25px;
+    margin-top: 0px;
 }
 .dnnav a{
     text-decoration: none;

@@ -29,7 +29,7 @@
             <a class="nav-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
               <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
             </svg>Search</a>
-            <a class="nav-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+            <a class="nav-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
               <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
             </svg>Locate Me</a>
             <a class="nav-link deliverybtn" href="#">Order on McDelivery</a>
@@ -50,7 +50,138 @@
       </div>
     </div>
   </nav>
+
+  <div id="carouselExampleCaptions" class="carousel slide mx-auto p-5">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="images/HM-Sonic-25-D.png" class="d-block w-70" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Race into Action with Sonic 3!</h5>
+          <p>Sonic 3 toys are now in Happy Meal! Collect them all and bring the adventure to life. Hurry -before they speed away!</p>
+          <button class="btn btn-warning">Order Now!</button>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="images/Ramadan-25-D.png" class="d-block w-70" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Fast & Deal-icious!</h5>
+          <p>Sehri or Iftar, the perfect feast awaits! Enjoy 2 Spicy McCrispy, 1 medium fries & 2 drinks-all for just Rs. 1075!</p>
+          <button class="btn btn-warning">Order Now!</button>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="images/Bring-it-Home-25-D.png" class="d-block w-70" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Score Big with McDonald's & Coke!</h5>
+          <p>The best match-day combo is here! Grab the McDonald's Jumbo Share Bag and get a FREE exclusive Coke glass. Limited stock, so hurry!</p>
+          <button class="btn btn-warning">Order Now!</button>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <div class="card-container text-center p-3">
+    <div class="card-row row g-4">
+      <!-- Card 1 -->
+      <div class="col">
+        <div class="card h-100">
+          <img src="images/item-1.jpg" class="card-img-top" alt="...">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title custom-heading">McCafé</h5> <!-- Custom class for h5 -->
+            <p class="card-text fs-6">Browse our menu for more information on topics such as our tasty coffee and espresso drinks.</p>
+            <div class="mt-auto d-flex justify-content-center"> <!-- Push button to bottom and center it -->
+              <button href="#" class="btn bg-warning w-40">Order Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
   
+      <!-- Card 2 -->
+      <div class="col">
+        <div class="card h-100">
+          <img src="images/item-2.jpg" class="card-img-top" alt="...">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title custom-heading">McDelivery</h5>
+            <p class="card-text fs-6">Delivering food at your doorsteps.</p>
+            <div class="mt-auto d-flex justify-content-center">
+              <button href="#" class="btn bg-warning w-40">Order Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Card 3 -->
+      <div class="col">
+        <div class="card h-100">
+          <img src="images/item-3.jpg" class="card-img-top" alt="...">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title custom-heading">Our App</h5>
+            <p class="card-text fs-6">McDonald's in your Pocket.</p>
+            <div class="mt-auto d-flex justify-content-center">
+              <button href="#" class="btn bg-warning w-40">Download Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row g-4 mt-4">
+      <!-- Card 4 -->
+      <div class="col">
+        <div class="card h-100">
+          <img src="images/item-4.png" class="card-img-top" alt="...">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title custom-heading">Our Menu</h5>
+            <p class="card-text fs-6">Our exclusive menu is waiting for you.</p>
+            <div class="mt-auto d-flex justify-content-center">
+              <button href="#" class="btn bg-warning w-40">Order Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Card 5 -->
+      <div class="col">
+        <div class="card h-100">
+          <img src="images/item-5.png" class="card-img-top" alt="...">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title custom-heading">Trending Now</h5>
+            <p class="card-text fs-6">Find out what's new.</p>
+            <div class="mt-auto d-flex justify-content-center">
+              <button href="#" class="btn bg-warning w-40">Learn More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Card 6 -->
+      <div class="col">
+        <div class="card h-100">
+          <img src="images/item-6.png" class="card-img-top" alt="...">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title custom-heading">Careers</h5>
+            <p class="card-text fs-6">Be a part of our team</p>
+            <div class="mt-auto d-flex justify-content-center">
+              <button href="#" class="btn bg-warning w-40">Apply Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

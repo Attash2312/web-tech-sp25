@@ -32,3 +32,38 @@
   .deliverybtn{
     background-color: rgb(207, 207, 3);
   }
+
+  .carousel-caption{
+    background-color: #ffffff;
+    color: black;
+    width: 30%;
+    height: 50%;
+    border-radius: 5px;
+    z-index: 10;
+    top: 200px;
+    left: 50px;
+    
+  }
+    .carousel-caption h5{
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    /* Custom styles for h5 */
+.custom-heading {
+    font-size: 1.5rem; /* Increase font size */
+    font-weight: 700; /* Increase font weight (bold) */
+    color: rgb(214, 2, 2); /* Dark red color */
+  }
+  
+  /* Ensure card body takes full height and aligns content properly */
+  .card-body {
+    flex: 1; /* Make card body take remaining space */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Ensure button is always at the bottom and centered */
+  .mt-auto {
+    margin-top: auto; /* Push button to the bottom */
+  }

@@ -78,3 +78,17 @@
     padding-left: 6px;
     margin: 10px;
   }
+
+  .social-section {
+    position: relative; /* Add this to make ::after work */
+    margin-bottom: 10px;
+  }
+  .social-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0%; /* Start 10% from the left */
+    width: 100%; /* 80% of the section width */
+    height: 1px; /* Thin line */
+    background-color: #ccc; /* Light gray color */
+}

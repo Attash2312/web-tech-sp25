@@ -67,3 +67,14 @@
   .mt-auto {
     margin-top: auto; /* Push button to the bottom */
   }
+
+  .social-icons a{
+    border: 1px solid black;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding-left: 6px;
+    margin: 10px;
+  }

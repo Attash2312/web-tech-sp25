@@ -1,3 +1,41 @@
+@media screen and (min-width: 768px) {
+    .navbar-mobile {
+      display: none; /* Hide mobile navbar */
+    }
+  }
+@media screen and (max-width: 768px) {
+    .navbar-pc {
+      display: none; /* Hide desktop navbar */
+
+    }
+    .navbar-mobile {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .navbar-brand img{
+        width: 50px;
+        height: 50px;
+    }
+    .deliverybtn{
+        background-color: rgb(207, 207, 3);
+        font-size: small;
+        font-weight: bold;
+        margin-right: 20%;
+        align-items: center;
+        justify-content: center;
+
+
+      }
+      .deliverybtn a{
+        padding: 10%;
+        width: 200%;
+        height: 100%;
+      }
+    
+  }
+
 /* Custom styles for spacing and alignment */
 .navbar-custom {
     background-color: #ffffff; /* Light background */

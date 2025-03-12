@@ -94,6 +94,11 @@
         font-size: 30px;
         font-weight: bold;
     }
+    .hero-section{
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 0 0 10px 10px;
+      margin: 10px;
+    }
 
     /* Custom styles for h5 */
 .custom-heading {

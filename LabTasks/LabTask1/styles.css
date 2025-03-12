@@ -101,6 +101,7 @@
     font-weight: 700; /* Increase font weight (bold) */
     color: rgb(214, 2, 2); /* Dark red color */
   }
+
   
   /* Ensure card body takes full height and aligns content properly */
   .card-body {

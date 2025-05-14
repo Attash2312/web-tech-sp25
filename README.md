@@ -11,11 +11,11 @@ The node_modules folder has been added in .gitignore file so it won't be downloa
 **Installation:** 
 ```
 git clone https://github.com/Attash2312/web-tech-sp25
-
-
+```
+**Dependencies:**
 ```
 npm install
-
+```
 
 ## Repository Structure:
 

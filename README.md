@@ -22,4 +22,5 @@
   - **Exams/**
     - **Midterm/**
     - **Final/**
+  - **Project/**
   - **README.md**

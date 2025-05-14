@@ -9,7 +9,10 @@
 The node_modules folder has been added in .gitignore file so it won't be downloaded when the repository is cloned.
 
 **Installation:** 
-git clone https://github.com/Attash2312/web-tech-sp25
+
+> git clone https://github.com/Attash2312/web-tech-sp25
+
+
 ```
 npm install
 ```

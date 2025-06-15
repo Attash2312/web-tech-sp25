@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><%= title %></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> | McDonald's</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="/css/styles.css" rel="stylesheet"> <!-- Link to your external CSS file -->
 </head>
 <body>
-        <%- body %>
+  <%- include('../partials/header') %>
+
+  <main class="container my-4">
+    <%- body %>
+  </main>
+
+  <%- include('../partials/footer') %>
+
+  <script src="/js/main.js"></script>
+  <% if (isAuthPage) { %>
+    <script src="/js/auth.js"></script>
+  <% } %>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

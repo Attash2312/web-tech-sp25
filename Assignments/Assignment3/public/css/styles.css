@@ -141,20 +141,26 @@
   }
 
   .carousel-caption{
+    
+    display: flex;
+  flex-direction: column;
+  justify-content: space-between;
     background-color: #ffffff;
     color: black;
     width: 30%;
-    height: 50%;
+    height: 55%;
     border-radius: 5px;
     z-index: 10;
-    top: 200px;
+    top: 150px;
     left: 50px;
     
   }
+
     .carousel-caption h5{
         font-size: 30px;
         font-weight: bold;
     }
+
     .hero-section{
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       border-radius: 0 0 10px 10px;

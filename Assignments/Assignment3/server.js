@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
 const path = require('path');
+const flash = require('connect-flash');
 
 // Initialize app
 const app = express();
@@ -21,6 +22,8 @@ app.set('view engine', 'ejs');
 app.set('layout', 'layouts/main');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(flash());
+
 
 // Sessions
 app.use(session({
@@ -40,7 +43,7 @@ app.use(passport.session());
 
 // Routes
 app.use('/', require('./routes/pageRoutes'));
-//app.use('/auth', require('./routes/authRoutes'));
+app.use('/', require('./routes/authRoutes'));
 //app.use('/menu', require('./routes/menuRoutes'));
 
 const PORT = process.env.PORT || 3000;

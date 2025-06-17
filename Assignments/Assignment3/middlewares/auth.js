@@ -3,14 +3,15 @@ const ensureAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
   }
+  req.flash('error_msg', 'Please log in to view this resource');
   res.redirect('/auth/login');
 };
 
 const ensureGuest = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return res.redirect('/auth/dashboard');
+  if (!req.isAuthenticated()) {
+    return next();
   }
-  next();
+  res.redirect('/');
 };
 
 const ensureAdmin = (req, res, next) => {
@@ -21,7 +22,7 @@ const ensureAdmin = (req, res, next) => {
 };
 
 module.exports = {
-  ensureAuthenticated,
-  ensureGuest,
-  ensureAdmin
+  ensureAuth: ensureAuthenticated,
+  ensureGuest: ensureGuest,
+  ensureAdmin: ensureAdmin
 };

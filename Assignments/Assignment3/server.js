@@ -13,8 +13,6 @@ const app = express();
 // Database
 require('./config/db');
 
-
-
 // Middleware
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressLayouts);
@@ -24,22 +22,27 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(flash());
 
-
 // Sessions
 app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false
+    secret: process.env.SESSION_SECRET || 'your-secret-key-here',
+    resave: false,
+    saveUninitialized: false
 }));
-
-// After session middleware in app.js
-app.use(passport.initialize());
-app.use(passport.session());
-require('./config/passport')(passport);
 
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+require('./config/passport')(passport);
+
+// Global variables
+app.use((req, res, next) => {
+    res.locals.user = req.user || null;
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    res.locals.isAuthPage = false; // Default value for all pages
+    next();
+});
 
 // Routes
 app.use('/', require('./routes/pageRoutes'));

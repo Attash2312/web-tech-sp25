@@ -1,28 +1,90 @@
 const express = require('express');
 const router = express.Router();
-const { ensureAuthenticated } = require('../middlewares/auth');
+const { ensureAuth } = require('../middlewares/auth');
 
-// 🟢 Public Route (no auth required)
-router.get('/', (req, res) => res.render('index', { 
-  title: 'Home',
-  user: req.user,
-  isAuthPage: false  // Avoid undefined error in layout
-}));
+// All routes are public for development
+router.get('/', (req, res) => {
+    res.render('index', {
+        title: 'Home',
+        isAuthPage: false
+    });
+});
 
-// 🔒 All Other Routes (require auth)
-router.get('/careers', ensureAuthenticated, (req, res) => res.render('careers', { 
-  title: 'Careers',
-  user: req.user,
-  isAuthPage: false
-}));
+router.get('/menu', (req, res) => {
+    res.render('pages/menu', {
+        title: 'Our Menu',
+        isAuthPage: false
+    });
+});
 
-router.get('/contact-us', ensureAuthenticated, (req, res) => res.render('contact-us', { 
-  title: 'Contact Us',
-  user: req.user,
-  isAuthPage: false
-}));
+router.get('/about-our-food', (req, res) => {
+    res.render('pages/about', {
+        title: 'About Our Food',
+        isAuthPage: false
+    });
+});
 
-// Add more protected routes below, all with ensureAuthenticated
-// ...
+router.get('/your-right-to-know', (req, res) => {
+    res.render('pages/your-right-to-know', {
+        title: 'Your Right To Know',
+        isAuthPage: false
+    });
+});
+
+router.get('/our-app', (req, res) => {
+    res.render('pages/our-app', {
+        title: 'Our App',
+        isAuthPage: false
+    });
+});
+
+router.get('/family', (req, res) => {
+    res.render('pages/family', {
+        title: 'Family',
+        isAuthPage: false
+    });
+});
+
+router.get('/cart', (req, res) => {
+    res.render('pages/cart', {
+        title: 'Cart',
+        isAuthPage: false
+    });
+});
+
+router.get('/trending-now', (req, res) => {
+    res.render('pages/trending', {
+        title: 'Trending Now',
+        isAuthPage: false
+    });
+});
+
+router.get('/contact-us', (req, res) => {
+    res.render('pages/contact-us', {
+        title: 'Contact Us',
+        isAuthPage: false
+    });
+});
+
+router.get('/search', (req, res) => {
+    res.render('pages/search', {
+        title: 'Search',
+        isAuthPage: false
+    });
+});
+
+router.get('/locate-me', (req, res) => {
+    res.render('pages/locate-me', {
+        title: 'Locate Me',
+        isAuthPage: false
+    });
+});
+
+router.get('/checkout', (req, res) => {
+    res.render('pages/checkout', {
+        title: 'Checkout',
+        isAuthPage: false
+    });
+});
 
 module.exports = router;

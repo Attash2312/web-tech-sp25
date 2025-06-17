@@ -1,18 +1,53 @@
-<div class="auth-form">
-    <h2>Login to McDonald's</h2>
-    <% if (error) { %>
-        <div class="error-message"><%= error %></div>
-    <% } %>
-    <form action="/login" method="POST">
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | McDonald's</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
+    <style>
+        .auth-link {
+            color: rgb(214, 2, 2) !important;
+            text-decoration: none;
+        }
+        .auth-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-center custom-heading">Login</h3>
+                    </div>
+                    <div class="card-body">
+                        <% if (messages.error) { %>
+                            <div class="alert alert-danger"><%= messages.error %></div>
+                        <% } %>
+                        <form action="/auth/login" method="POST">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn deliverybtn">Login</button>
+                            </div>
+                        </form>
+                        <div class="text-center mt-3">
+                            <p>Don't have an account? <a href="/auth/register" class="auth-link">Register here</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <button type="submit" class="auth-btn">Login</button>
-    </form>
-    <p class="auth-link">Don't have an account? <a href="/register">Register here</a></p>
-</div>
+    </div>
+</body>
+</html>

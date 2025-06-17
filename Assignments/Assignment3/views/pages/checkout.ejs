@@ -1,0 +1,207 @@
+<div class="container mt-4">
+    <h1 class="custom-heading">Payment Information</h1>
+    <form id="paymentForm" novalidate>
+        <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" required pattern="[A-Za-z ]+">
+            <span class="error-message">Please enter a valid name (letters only)*</span>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+            <span class="error-message">Please enter a valid email address*</span>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required pattern="\d{10,15}" minlength="10" maxlength="15">
+            <span class="error-message">Please enter 10-15 digits*</span>
+        </div>
+
+        <div class="form-group">
+            <label for="address">Delivery Address</label>
+            <textarea id="address" name="address" required></textarea>
+            <span class="error-message">Please enter your delivery address*</span>
+        </div>
+
+        <div class="form-group">
+            <label for="cardNumber">Credit Card Number</label>
+            <input type="text" id="cardNumber" name="cardNumber" required pattern="\d{16}" minlength="16" maxlength="16">
+            <span class="error-message">Please enter 16 digits*</span>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="expiryDate">Expiry Date</label>
+                <input type="month" id="expiryDate" name="expiryDate" required>
+                <span class="error-message">Please select a future date*</span>
+            </div>
+
+            <div class="form-group">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" name="cvv" required pattern="\d{3}" minlength="3" maxlength="3">
+                <span class="error-message">Please enter 3 digits*</span>
+            </div>
+        </div>
+
+        <button type="submit" class="deliverybtn">Complete Order</button>
+    </form>
+</div>
+
+<style>
+.container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
+}
+
+input:invalid, textarea:invalid {
+    border-color: #e74c3c;
+}
+
+input:invalid + .error-message,
+textarea:invalid + .error-message {
+    display: block;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+button {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: red;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('paymentForm');
+    const expiryDate = document.getElementById('expiryDate');
+
+    // Set minimum expiry date to current month
+    const today = new Date();
+    const minDate = today.toISOString().slice(0, 7);
+    expiryDate.setAttribute('min', minDate);
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        // Validate all fields
+        const isValid = validateForm();
+        
+        if (isValid) {
+            // Form is valid - process submission
+            alert('Order placed successfully!');
+            form.reset();
+        }
+    });
+
+    function validateForm() {
+        let isValid = true;
+        const fields = form.querySelectorAll('input, textarea');
+        
+        fields.forEach(field => {
+            if (!field.checkValidity()) {
+                showError(field);
+                isValid = false;
+            } else {
+                hideError(field);
+            }
+        });
+
+        // Additional custom validation for expiry date
+        if (expiryDate.value) {
+            const selectedDate = new Date(expiryDate.value);
+            if (selectedDate < today) {
+                showError(expiryDate, 'Please select a future date');
+                isValid = false;
+            }
+        }
+
+        return isValid;
+    }
+
+    function showError(field, customMessage = null) {
+        const errorMessage = field.nextElementSibling;
+        field.classList.add('invalid');
+        
+        if (customMessage) {
+            errorMessage.textContent = customMessage;
+        }
+        errorMessage.style.display = 'block';
+    }
+
+    function hideError(field) {
+        field.classList.remove('invalid');
+        const errorMessage = field.nextElementSibling;
+        errorMessage.style.display = 'none';
+    }
+
+    // Real-time validation on input change
+    form.querySelectorAll('input, textarea').forEach(field => {
+        field.addEventListener('input', function() {
+            if (this.checkValidity()) {
+                hideError(this);
+            }
+        });
+    });
+});
+</script> 

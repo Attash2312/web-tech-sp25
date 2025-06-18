@@ -42,6 +42,14 @@
                                         <h5 class="card-title"><%= item.name %></h5>
                                         <p class="card-text"><%= item.description %></p>
                                         <p class="price">$<%= item.price.toFixed(2) %></p>
+                                        <form action="/cart/add/<%= item._id %>" method="POST" class="d-flex align-items-center">
+                                            <div class="input-group me-2" style="width: 120px;">
+                                                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="decrementQuantity(this)">-</button>
+                                                <input type="number" name="quantity" value="1" min="1" class="form-control form-control-sm text-center" style="width: 50px;">
+                                                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="incrementQuantity(this)">+</button>
+                                            </div>
+                                            <button type="submit" class="btn bg-warning w-40">Add to Cart</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -154,4 +162,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+function incrementQuantity(button) {
+    const input = button.parentElement.querySelector('input');
+    input.value = parseInt(input.value) + 1;
+}
+
+function decrementQuantity(button) {
+    const input = button.parentElement.querySelector('input');
+    const currentValue = parseInt(input.value);
+    if (currentValue > 1) {
+        input.value = currentValue - 1;
+    }
+}
 </script> 

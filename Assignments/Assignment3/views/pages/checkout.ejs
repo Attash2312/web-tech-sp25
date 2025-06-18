@@ -1,63 +1,143 @@
-<div class="container mt-4">
-    <h1 class="custom-heading">Payment Information</h1>
-    <form id="paymentForm" novalidate>
-        <div class="form-group">
-            <label for="fullName">Full Name</label>
-            <input type="text" id="fullName" name="fullName" required pattern="[A-Za-z ]+">
-            <span class="error-message">Please enter a valid name (letters only)*</span>
-        </div>
+<div class="container mx-auto px-4 py-8 max-w-4xl">
+    <h1 class="text-3xl font-bold mb-8 text-center text-gray-800">Checkout</h1>
 
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
-            <span class="error-message">Please enter a valid email address*</span>
+    <!-- Order Summary -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <h2 class="text-2xl font-semibold mb-6 text-gray-800 border-b pb-2 text-center">Order Summary</h2>
+        <div class="overflow-x-auto">
+            <table class="min-w-full">
+                <thead>
+                    <tr class="bg-gray-50">
+                        <th class="px-4 py-3 text-center text-sm font-medium text-gray-600">Product</th>
+                        <th class="px-4 py-3 text-center text-sm font-medium text-gray-600">Quantity</th>
+                        <th class="px-4 py-3 text-center text-sm font-medium text-gray-600">Price</th>
+                        <th class="px-4 py-3 text-center text-sm font-medium text-gray-600">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    <% cart.forEach(item => { %>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-4 py-3 text-sm text-gray-800 text-center"><%= item.name %></td>
+                            <td class="px-4 py-3 text-sm text-gray-800 text-center"><%= item.quantity %></td>
+                            <td class="px-4 py-3 text-sm text-gray-800 text-center">$<%= item.price.toFixed(2) %></td>
+                            <td class="px-4 py-3 text-sm text-gray-800 text-center">$<%= (item.price * item.quantity).toFixed(2) %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+                <tfoot>
+                    <tr class="bg-gray-50">
+                        <td colspan="3" class="px-4 py-3 text-center text-sm font-semibold text-gray-800">Total:</td>
+                        <td class="px-4 py-3 text-center text-sm font-semibold text-gray-800">$<%= total.toFixed(2) %></td>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
+    </div>
 
-        <div class="form-group">
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" required pattern="\d{10,15}" minlength="10" maxlength="15">
-            <span class="error-message">Please enter 10-15 digits*</span>
-        </div>
-
-        <div class="form-group">
-            <label for="address">Delivery Address</label>
-            <textarea id="address" name="address" required></textarea>
-            <span class="error-message">Please enter your delivery address*</span>
-        </div>
-
-        <div class="form-group">
-            <label for="cardNumber">Credit Card Number</label>
-            <input type="text" id="cardNumber" name="cardNumber" required pattern="\d{16}" minlength="16" maxlength="16">
-            <span class="error-message">Please enter 16 digits*</span>
-        </div>
-
-        <div class="form-row">
+    <!-- Delivery Information -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-2xl font-semibold mb-6 text-gray-800 border-b pb-2 text-center">Delivery Information</h2>
+        <form action="/cart/place-order" method="POST" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="form-group">
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                    <input type="text" id="name" name="name" required
+                        class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-colors"
+                        placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required
+                        class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-colors"
+                        placeholder="Enter your phone number">
+                </div>
+            </div>
             <div class="form-group">
-                <label for="expiryDate">Expiry Date</label>
-                <input type="month" id="expiryDate" name="expiryDate" required>
-                <span class="error-message">Please select a future date*</span>
+                <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Delivery Address</label>
+                <textarea id="address" name="address" rows="3" required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-colors"
+                    placeholder="Enter your delivery address"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="notes" class="block text-sm font-medium text-gray-700 mb-1">Special Instructions (Optional)</label>
+                <textarea id="notes" name="notes" rows="2"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-colors"
+                    placeholder="Any special delivery instructions or preferences..."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="paymentMethod" class="block text-sm font-medium text-gray-700 mb-1">Payment Method</label>
+                <select id="paymentMethod" name="paymentMethod" required onchange="toggleCardFields()"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-colors">
+                    <option value="cash">Pay Later with Cash</option>
+                    <option value="card">Credit/Debit Card</option>
+                </select>
             </div>
 
-            <div class="form-group">
-                <label for="cvv">CVV</label>
-                <input type="text" id="cvv" name="cvv" required pattern="\d{3}" minlength="3" maxlength="3">
-                <span class="error-message">Please enter 3 digits*</span>
+            <!-- Card Payment Fields (Hidden by default) -->
+            <div id="cardFields" class="hidden space-y-6 bg-gray-50 p-6 rounded-md border border-gray-200">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="form-group">
+                        <label for="cardNumber" class="block text-sm font-medium text-gray-700 mb-1">Card Number</label>
+                        <input type="text" id="cardNumber" name="cardNumber" maxlength="19"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-colors"
+                            placeholder="1234 5678 9012 3456">
+                    </div>
+                    <div class="form-group">
+                        <label for="cardName" class="block text-sm font-medium text-gray-700 mb-1">Name on Card</label>
+                        <input type="text" id="cardName" name="cardName"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-colors"
+                            placeholder="Enter name as shown on card">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="form-group">
+                        <label for="expiryDate" class="block text-sm font-medium text-gray-700 mb-1">Expiry Date</label>
+                        <input type="text" id="expiryDate" name="expiryDate" maxlength="5"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-colors"
+                            placeholder="MM/YY">
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv" class="block text-sm font-medium text-gray-700 mb-1">CVV</label>
+                        <input type="text" id="cvv" name="cvv" maxlength="3"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-colors"
+                            placeholder="123">
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <button type="submit" class="deliverybtn">Complete Order</button>
-    </form>
+            <div class="flex justify-center items-center pt-6 border-t border-gray-200 space-x-4">
+                <a href="/cart" class="text-yellow-600 hover:text-yellow-700 font-medium transition-colors px-4 py-2">
+                    ← Back to Cart
+                </a>
+                <button type="submit"
+                    class="bg-warning text-gray-800 px-8 py-3 rounded-md hover:bg-red-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 transition-colors font-medium">
+                    Confirm Order
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 
 <style>
+* {
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
 .container {
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     padding: 30px;
     width: 100%;
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
 }
 
 .form-group {
@@ -72,7 +152,7 @@ label {
     color: #555;
 }
 
-input, textarea {
+input, textarea, select {
     width: 100%;
     padding: 12px;
     border: 1px solid #ddd;
@@ -86,7 +166,7 @@ textarea {
     resize: vertical;
 }
 
-input:focus, textarea:focus {
+input:focus, textarea:focus, select:focus {
     outline: none;
     border-color: #4a90e2;
     box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
@@ -108,17 +188,9 @@ textarea:invalid + .error-message {
     display: block;
 }
 
-.form-row {
-    display: flex;
-    gap: 20px;
-}
-
-.form-row .form-group {
-    flex: 1;
-}
-
 button {
-    width: 100%;
+    background-color: rgb(207, 207, 3);
+    border: none;
     padding: 12px 20px;
     border-radius: 4px;
     cursor: pointer;
@@ -129,79 +201,97 @@ button {
 button:hover {
     background-color: red;
 }
+
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .grid {
+        grid-template-columns: 1fr;
+    }
+    
+    button {
+        width: 100%;
+    }
+}
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('paymentForm');
-    const expiryDate = document.getElementById('expiryDate');
+function toggleCardFields() {
+    const paymentMethod = document.getElementById('paymentMethod').value;
+    const cardFields = document.getElementById('cardFields');
+    const cardInputs = cardFields.querySelectorAll('input');
+    
+    if (paymentMethod === 'card') {
+        cardFields.classList.remove('hidden');
+        cardInputs.forEach(input => {
+            input.required = true;
+            input.setAttribute('data-required', 'true');
+        });
+    } else {
+        cardFields.classList.add('hidden');
+        cardInputs.forEach(input => {
+            input.required = false;
+            input.removeAttribute('data-required');
+            input.value = '';
+        });
+    }
+}
 
-    // Set minimum expiry date to current month
-    const today = new Date();
-    const minDate = today.toISOString().slice(0, 7);
-    expiryDate.setAttribute('min', minDate);
-
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        
-        // Validate all fields
-        const isValid = validateForm();
-        
-        if (isValid) {
-            // Form is valid - process submission
-            alert('Order placed successfully!');
-            form.reset();
+// Format card number with spaces
+document.getElementById('cardNumber').addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+    let formattedValue = '';
+    for(let i = 0; i < value.length; i++) {
+        if(i > 0 && i % 4 === 0) {
+            formattedValue += ' ';
         }
-    });
+        formattedValue += value[i];
+    }
+    e.target.value = formattedValue;
+});
 
-    function validateForm() {
+// Format expiry date
+document.getElementById('expiryDate').addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+    if (value.length >= 2) {
+        value = value.slice(0,2) + '/' + value.slice(2);
+    }
+    e.target.value = value;
+});
+
+// Only allow numbers in CVV
+document.getElementById('cvv').addEventListener('input', function(e) {
+    e.target.value = e.target.value.replace(/[^0-9]/gi, '');
+});
+
+// Form submission validation
+document.querySelector('form').addEventListener('submit', function(e) {
+    const paymentMethod = document.getElementById('paymentMethod').value;
+    const cardFields = document.getElementById('cardFields');
+    const cardInputs = cardFields.querySelectorAll('input');
+    
+    if (paymentMethod === 'card') {
         let isValid = true;
-        const fields = form.querySelectorAll('input, textarea');
-        
-        fields.forEach(field => {
-            if (!field.checkValidity()) {
-                showError(field);
+        cardInputs.forEach(input => {
+            if (!input.value.trim()) {
                 isValid = false;
+                input.classList.add('border-red-500');
             } else {
-                hideError(field);
+                input.classList.remove('border-red-500');
             }
         });
-
-        // Additional custom validation for expiry date
-        if (expiryDate.value) {
-            const selectedDate = new Date(expiryDate.value);
-            if (selectedDate < today) {
-                showError(expiryDate, 'Please select a future date');
-                isValid = false;
-            }
-        }
-
-        return isValid;
-    }
-
-    function showError(field, customMessage = null) {
-        const errorMessage = field.nextElementSibling;
-        field.classList.add('invalid');
         
-        if (customMessage) {
-            errorMessage.textContent = customMessage;
+        if (!isValid) {
+            e.preventDefault();
+            alert('Please fill in all card payment details');
         }
-        errorMessage.style.display = 'block';
     }
+});
 
-    function hideError(field) {
-        field.classList.remove('invalid');
-        const errorMessage = field.nextElementSibling;
-        errorMessage.style.display = 'none';
-    }
-
-    // Real-time validation on input change
-    form.querySelectorAll('input, textarea').forEach(field => {
-        field.addEventListener('input', function() {
-            if (this.checkValidity()) {
-                hideError(this);
-            }
-        });
-    });
+// Initialize card fields state on page load
+document.addEventListener('DOMContentLoaded', function() {
+    toggleCardFields();
 });
 </script> 

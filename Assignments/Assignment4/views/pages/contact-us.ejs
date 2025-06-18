@@ -31,7 +31,11 @@
                     <div class="contact-content">
                         <h3 class="custom-heading">Complaint</h3>
                         <p>Our customers are our top priority and we always try to ensure you are satisfied. However, If you have any feedback, feel free to reach out to us.</p>
-                        <a href="#" class="deliverybtn">Click Here</a>
+                        <% if (user) { %>
+                            <a href="/complaints/submit" class="deliverybtn">Submit Complaint</a>
+                        <% } else { %>
+                            <a href="/auth/login" class="deliverybtn">Login to Submit</a>
+                        <% } %>
                     </div>
                 </div>
             </div>

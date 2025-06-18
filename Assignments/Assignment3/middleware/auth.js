@@ -21,7 +21,17 @@ const isNotAuthenticated = (req, res, next) => {
     res.redirect('/');
 };
 
+// Middleware to check if user is admin
+const isAdmin = (req, res, next) => {
+    if (req.isAuthenticated() && req.user && req.user.isAdmin) {
+        return next();
+    }
+    req.flash('error', 'You are not authorized to access this page');
+    res.redirect('/');
+};
+
 module.exports = {
     isAuthenticated,
-    isNotAuthenticated
+    isNotAuthenticated,
+    isAdmin
 }; 

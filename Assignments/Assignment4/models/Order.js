@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: false // Making it optional to support existing orders
+    },
     user: {
         name: {
             type: String,
@@ -18,7 +23,7 @@ const orderSchema = new mongoose.Schema({
     items: [{
         product: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Menu',
+            ref: 'MenuItem',
             required: true
         },
         title: {

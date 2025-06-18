@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Order = require('../models/Order');
+const MenuItem = require('../models/Menu');
+const User = require('../models/user');
 const { isAuthenticated } = require('../middleware/auth');
 
 // My Orders Page - Protected Route

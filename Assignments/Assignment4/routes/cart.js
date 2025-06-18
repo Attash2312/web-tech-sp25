@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const Menu = require('../models/Menu');
+const MenuItem = require('../models/Menu');
 const Order = require('../models/Order');
+const User = require('../models/user');
 
 // Initialize cart in session if it doesn't exist
 const initializeCart = (req, res, next) => {
@@ -17,7 +18,7 @@ router.post('/add/:productId', initializeCart, async (req, res) => {
         const productId = req.params.productId;
         const quantity = parseInt(req.body.quantity) || 1;
         
-        const product = await Menu.findById(productId);
+        const product = await MenuItem.findById(productId);
         if (!product) {
             return res.status(404).render('error', {
                 title: 'Error',
@@ -167,7 +168,7 @@ router.post('/place-order', initializeCart, async (req, res) => {
 
         const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-        const order = new Order({
+        const orderData = {
             user: {
                 name,
                 phone,
@@ -188,8 +189,14 @@ router.post('/place-order', initializeCart, async (req, res) => {
                 expiryDate
             } : null,
             status: 'pending'
-        });
+        };
 
+        // Add userId if user is authenticated
+        if (req.user && req.user._id) {
+            orderData.userId = req.user._id;
+        }
+
+        const order = new Order(orderData);
         await order.save();
         
         // Clear the cart

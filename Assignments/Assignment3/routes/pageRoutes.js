@@ -107,9 +107,14 @@ router.get('/family', (req, res) => {
 
 // Protected routes - require authentication
 router.get('/cart', isAuthenticated, (req, res) => {
+    const cart = req.session.cart || [];
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    
     res.render('pages/cart', {
-        title: 'Cart',
-        isAuthPage: false
+        title: 'Shopping Cart',
+        isAuthPage: false,
+        cart,
+        total
     });
 });
 
@@ -142,9 +147,14 @@ router.get('/locate-me', isAuthenticated, (req, res) => {
 });
 
 router.get('/checkout', isAuthenticated, (req, res) => {
+    const cart = req.session.cart || [];
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    
     res.render('pages/checkout', {
         title: 'Checkout',
-        isAuthPage: false
+        isAuthPage: false,
+        cart,
+        total
     });
 });
 

@@ -9,6 +9,12 @@ const flash = require('connect-flash');
 const connectDB = require('./config/db');
 const methodOverride = require('method-override');
 
+// Import all models to ensure they're registered
+require('./models/user');
+require('./models/Menu');
+require('./models/Order');
+require('./models/Complaint');
+
 // Initialize app
 const app = express();
 
@@ -62,6 +68,10 @@ app.use((req, res, next) => {
 app.use('/', require('./routes/pageRoutes'));
 app.use('/auth', require('./routes/authRoutes'));
 app.use('/cart', require('./routes/cart'));
+app.use('/orders', require('./routes/orders'));
+app.use('/admin', require('./routes/admin'));
+app.use('/my-orders', require('./routes/my-orders'));
+app.use('/complaints', require('./routes/complaints'));
 
 // Error handling middleware
 app.use((err, req, res, next) => {

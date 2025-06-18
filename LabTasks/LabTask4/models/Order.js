@@ -23,7 +23,7 @@ const orderSchema = new mongoose.Schema({
     items: [{
         product: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Menu',
+            ref: 'MenuItem',
             required: true
         },
         title: {

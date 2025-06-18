@@ -9,6 +9,12 @@ const flash = require('connect-flash');
 const connectDB = require('./config/db');
 const methodOverride = require('method-override');
 
+// Import all models to ensure they're registered
+require('./models/user');
+require('./models/Menu');
+require('./models/Order');
+require('./models/Complaint');
+
 // Initialize app
 const app = express();
 
@@ -28,18 +34,20 @@ app.set('layout', 'layouts/main');
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(methodOverride('_method'));
-app.use(flash());
 
 // Sessions
 app.use(session({
     secret: process.env.SESSION_SECRET || 'your-secret-key',
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
     cookie: {
         secure: process.env.NODE_ENV === 'production',
         maxAge: 24 * 60 * 60 * 1000 // 24 hours
     }
 }));
+
+// Flash messages
+app.use(flash());
 
 // Passport middleware
 app.use(passport.initialize());
@@ -59,6 +67,11 @@ app.use((req, res, next) => {
 // Routes
 app.use('/', require('./routes/pageRoutes'));
 app.use('/auth', require('./routes/authRoutes'));
+app.use('/cart', require('./routes/cart'));
+app.use('/orders', require('./routes/orders'));
+app.use('/admin', require('./routes/admin'));
+app.use('/my-orders', require('./routes/my-orders'));
+app.use('/complaints', require('./routes/complaints'));
 
 // Error handling middleware
 app.use((err, req, res, next) => {

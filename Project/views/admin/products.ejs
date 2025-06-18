@@ -1,0 +1,33 @@
+<h1>Product Management</h1>
+<a href="/admin/products/add" class="btn btn-primary mb-3">Add Product</a>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Description</th>
+      <th>Category</th>
+      <th>Image</th>
+      <th>Available</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% products.forEach(product => { %>
+      <tr>
+        <td><%= product.name %></td>
+        <td>$<%= product.price %></td>
+        <td><%= product.description %></td>
+        <td><%= product.category %></td>
+        <td><img src="<%= product.image %>" alt="<%= product.name %>" width="80" class="img-thumbnail"></td>
+        <td><span class="badge <%= product.isAvailable ? 'bg-success' : 'bg-danger' %>"><%= product.isAvailable ? 'Yes' : 'No' %></span></td>
+        <td>
+          <a href="/admin/products/edit/<%= product._id %>" class="btn btn-sm btn-warning">Edit</a>
+          <form action="/admin/products/delete/<%= product._id %>" method="POST" style="display:inline;">
+            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this product?')">Delete</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table> 

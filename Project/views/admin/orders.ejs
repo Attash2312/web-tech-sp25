@@ -1,0 +1,40 @@
+<h1>All Orders</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Customer</th>
+      <th>Items</th>
+      <th>Total Price</th>
+      <th>Order Date</th>
+      <th>Status</th>
+      <th>Update Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% orders.forEach(order => { %>
+      <tr>
+        <td><%= order.user ? order.user.name : 'N/A' %></td>
+        <td>
+          <ul class="list-unstyled mb-0">
+            <% order.items.forEach(item => { %>
+              <li><%= item.title %> x <%= item.quantity %></li>
+            <% }) %>
+          </ul>
+        </td>
+        <td>$<%= order.totalAmount %></td>
+        <td><%= order.createdAt ? order.createdAt.toLocaleString() : '' %></td>
+        <td><span class="badge bg-info"><%= order.status %></span></td>
+        <td>
+          <form action="/admin/orders/<%= order._id %>/status" method="POST" class="d-flex gap-2">
+            <select name="status" class="form-select form-select-sm">
+              <option value="pending" <%= order.status === 'pending' ? 'selected' : '' %>>Pending</option>
+              <option value="completed" <%= order.status === 'completed' ? 'selected' : '' %>>Completed</option>
+              <option value="cancelled" <%= order.status === 'cancelled' ? 'selected' : '' %>>Cancelled</option>
+            </select>
+            <button type="submit" class="btn btn-sm btn-primary">Update</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table> 

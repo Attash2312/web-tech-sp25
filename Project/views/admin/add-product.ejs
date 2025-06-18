@@ -1,0 +1,47 @@
+<h1>Add Product</h1>
+<form action="/admin/products/add" method="POST" class="row g-3">
+  <div class="col-md-6">
+    <label class="form-label">Name:</label>
+    <input type="text" name="name" class="form-control" required>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Price:</label>
+    <input type="number" name="price" step="0.01" class="form-control" required>
+  </div>
+  <div class="col-12">
+    <label class="form-label">Description:</label>
+    <textarea name="description" class="form-control" rows="3" required></textarea>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Image URL:</label>
+    <input type="text" name="image" class="form-control" required>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Category:</label>
+    <select name="category" class="form-select" required>
+      <option value="">Select Category</option>
+      <option>Breakfast</option>
+      <option>Chicken & Fish</option>
+      <option>Crispy Chicken</option>
+      <option>Wraps</option>
+      <option>Happy Meal</option>
+      <option>Extra Value Meals</option>
+      <option>Value Meals</option>
+      <option>Desserts</option>
+      <option>Beverages</option>
+      <option>McCafé</option>
+      <option>Beef</option>
+      <option>Fries & Sides</option>
+    </select>
+  </div>
+  <div class="col-12">
+    <div class="form-check">
+      <input type="checkbox" name="isAvailable" class="form-check-input" checked>
+      <label class="form-check-label">Available</label>
+    </div>
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Add Product</button>
+    <a href="/admin/products" class="btn btn-secondary">Back to Products</a>
+  </div>
+</form> 

@@ -94,11 +94,14 @@ router.post('/products/delete/:id', async (req, res) => {
 router.get('/orders', async (req, res) => {
     try {
         const orders = await Order.find().populate('userId', 'name email');
-        res.render('admin/orders', { orders });
+        res.render('admin/orders', { orders, title: 'Order Management' });
     } catch (error) {
         console.error('Error loading orders:', error);
-        req.flash('error', 'Error loading orders');
-        res.redirect('/admin');
+        res.status(500).render('error', {
+            title: 'Error',
+            message: 'Error loading orders',
+            error: error.message
+        });
     }
 });
 

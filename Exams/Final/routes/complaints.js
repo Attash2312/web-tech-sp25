@@ -73,9 +73,22 @@ router.get('/my-complaints', isAuthenticated, async (req, res) => {
             .populate('orderId', 'totalAmount createdAt status')
             .sort({ createdAt: -1 });
 
+        // Helper function for status badge classes
+        const getStatusBadgeClass = (status) => {
+            if (!status) return 'bg-secondary';
+            switch(status) {
+                case 'pending': return 'bg-warning';
+                case 'in-progress': return 'bg-info';
+                case 'resolved': return 'bg-success';
+                case 'closed': return 'bg-secondary';
+                default: return 'bg-primary';
+            }
+        };
+
         res.render('complaints/my-complaints', {
             title: 'My Complaints',
-            complaints: complaints
+            complaints: complaints,
+            getStatusBadgeClass: getStatusBadgeClass
         });
     } catch (error) {
         console.error('Error loading complaints:', error);
@@ -95,9 +108,22 @@ router.get('/admin/all', isAdmin, async (req, res) => {
             .populate('orderId', 'totalAmount createdAt status')
             .sort({ createdAt: -1 });
 
+        // Helper function for status badge classes
+        const getStatusBadgeClass = (status) => {
+            if (!status) return 'bg-secondary';
+            switch(status) {
+                case 'pending': return 'bg-warning';
+                case 'in-progress': return 'bg-info';
+                case 'resolved': return 'bg-success';
+                case 'closed': return 'bg-secondary';
+                default: return 'bg-primary';
+            }
+        };
+
         res.render('admin/complaints', {
             title: 'All Complaints',
-            complaints: complaints
+            complaints: complaints,
+            getStatusBadgeClass: getStatusBadgeClass
         });
     } catch (error) {
         console.error('Error loading all complaints:', error);

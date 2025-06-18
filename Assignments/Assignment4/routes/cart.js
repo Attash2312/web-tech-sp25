@@ -154,7 +154,7 @@ router.get('/checkout', initializeCart, (req, res) => {
 // Place order
 router.post('/place-order', initializeCart, async (req, res) => {
     try {
-        const { name, phone, address, notes, paymentMethod } = req.body;
+        const { name, phone, address, notes, paymentMethod, cardNumber, cardName, expiryDate, cvv } = req.body;
         const cart = req.session.cart || [];
 
         if (cart.length === 0) {
@@ -182,6 +182,11 @@ router.post('/place-order', initializeCart, async (req, res) => {
             totalAmount,
             notes: notes || '',
             paymentMethod: paymentMethod || 'cash',
+            paymentDetails: paymentMethod === 'card' ? {
+                cardNumber: cardNumber ? cardNumber.slice(-4) : null, // Only store last 4 digits
+                cardName,
+                expiryDate
+            } : null,
             status: 'pending'
         });
 

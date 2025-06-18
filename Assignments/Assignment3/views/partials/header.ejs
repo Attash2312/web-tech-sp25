@@ -40,7 +40,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link deliverybtn" href="/auth/login">Login / Sign Up</a>
+              <a class="nav-link deliverybtn" href="<%= locals.user ? '/auth/logout' : '/auth/login' %>">
+                <%= locals.user ? 'Logout' : 'Login / Sign Up' %>
+              </a>
             </li>
           </div>
         </div>
@@ -64,7 +66,7 @@
                 <div class="col">
                   <div class="d-flex align-items-center megamenu-item">
                     <img src="/images/mega-menu/beef-img.jpg" class="megamenu-img" alt="Beef Burgers">
-                    <a href="#" class="ms-3">Beef Burgers</a>
+                    <a href="/menu#beef" class="ms-3">Beef Burgers</a>
                   </div>
                 </div>
                 
@@ -72,7 +74,7 @@
                 <div class="col">
                   <div class="d-flex align-items-center megamenu-item">
                     <img src="/images/mega-menu/chicken-and-fish.jpg" class="megamenu-img" alt="Chicken & Fish">
-                    <a href="#" class="ms-3">Chicken & Fish</a>
+                    <a href="/menu#chicken-&-fish" class="ms-3">Chicken & Fish</a>
                   </div>
                 </div>
 
@@ -80,7 +82,7 @@
                 <div class="col">
                   <div class="d-flex align-items-center megamenu-item">
                     <img src="/images/mega-menu/breakfast-pk-new-.jpg" class="megamenu-img" alt="Breakfast">
-                    <a href="#" class="ms-3">Breakfast</a>
+                    <a href="/menu#breakfast" class="ms-3">Breakfast</a>
                   </div>
                 </div>
 
@@ -88,7 +90,7 @@
                 <div class="col">
                   <div class="d-flex align-items-center megamenu-item">
                     <img src="/images/mega-menu/fries-and-sides.jpg" class="megamenu-img" alt="Fries & Sides">
-                    <a href="#" class="ms-3">Fries & Sides</a>
+                    <a href="/menu#fries-&-sides" class="ms-3">Fries & Sides</a>
                   </div>
                 </div>
 
@@ -96,7 +98,7 @@
                 <div class="col">
                   <div class="d-flex align-items-center megamenu-item">
                     <img src="/images/mega-menu/happy-meals-pk-new.jpg" class="megamenu-img" alt="Happy Meals">
-                    <a href="#" class="ms-3">Happy Meals</a>
+                    <a href="/menu#happy-meal" class="ms-3">Happy Meals</a>
                   </div>
                 </div>
 
@@ -104,7 +106,7 @@
                 <div class="col">
                   <div class="d-flex align-items-center megamenu-item">
                     <img src="/images/mega-menu/beverages-pk-new.jpg" class="megamenu-img" alt="Beverages">
-                    <a href="#" class="ms-3">Beverages</a>
+                    <a href="/menu#beverages" class="ms-3">Beverages</a>
                   </div>
                 </div>
 
@@ -112,7 +114,7 @@
                 <div class="col">
                   <div class="d-flex align-items-center megamenu-item">
                     <img src="/images/mega-menu/desserts-pk-new.jpg" class="megamenu-img" alt="Desserts">
-                    <a href="#" class="ms-3">Desserts</a>
+                    <a href="/menu#desserts" class="ms-3">Desserts</a>
                   </div>
                 </div>
 
@@ -120,7 +122,7 @@
                 <div class="col">
                   <div class="d-flex align-items-center megamenu-item">
                     <img src="/images/mega-menu/McCafe-pk-new.jpg" class="megamenu-img" alt="McCafé">
-                    <a href="#" class="ms-3">McCafé</a>
+                    <a href="/menu#mccafé" class="ms-3">McCafé</a>
                   </div>
                 </div>
 
@@ -128,7 +130,7 @@
                 <div class="col">
                   <div class="d-flex align-items-center megamenu-item">
                     <img src="/images/mega-menu/extra-value-meals-pk-new.jpg" class="megamenu-img" alt="Extra Value Meals">
-                    <a href="#" class="ms-3">Extra Value Meals</a>
+                    <a href="/menu#value-meals" class="ms-3">Extra Value Meals</a>
                   </div>
                 </div>
               </div>
@@ -172,7 +174,9 @@
       </svg></a>
       </div>
       <div class="deliverybtn">
-        <a class="nav-link deliverybtn" href="/auth/login">Login / Sign Up</a>
+        <a class="nav-link deliverybtn" href="<%= locals.user ? '/auth/logout' : '/auth/login' %>">
+          <%= locals.user ? 'Logout' : 'Login / Sign Up' %>
+        </a>
       </div>
   </nav>
 

@@ -3,11 +3,14 @@ require('dotenv').config();
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI, {
+    const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/mcdonalds', {
       useNewUrlParser: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
     });
-    console.log('MongoDB Connected...');
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+    return conn;
   } catch (err) {
     console.error('Database connection error:', err.message);
     process.exit(1);

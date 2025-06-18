@@ -2,7 +2,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
-const User = require('../models/User');
+const User = require('../models/user');
 
 module.exports = function(passport) {
   passport.use(
@@ -11,7 +11,7 @@ module.exports = function(passport) {
         // Match user
         const user = await User.findOne({ email: email });
         if (!user) {
-          return done(null, false, { message: 'That email is not registered' });
+          return done(null, false, { message: 'No account found with this email address' });
         }
 
         // Match password
@@ -19,7 +19,7 @@ module.exports = function(passport) {
         if (isMatch) {
           return done(null, user);
         } else {
-          return done(null, false, { message: 'Password incorrect' });
+          return done(null, false, { message: 'Incorrect password' });
         }
       } catch (err) {
         console.error(err);

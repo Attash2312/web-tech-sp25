@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { ensureAuth } = require('../middlewares/auth');
+const { isAuthenticated } = require('../middleware/auth');
+const MenuItem = require('../models/Menu');
+const mongoose = require('mongoose');
 
-// All routes are public for development
+// Public routes
 router.get('/', (req, res) => {
     res.render('index', {
         title: 'Home',
@@ -10,11 +12,69 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/menu', (req, res) => {
-    res.render('pages/menu', {
-        title: 'Our Menu',
-        isAuthPage: false
-    });
+router.get('/menu', async (req, res) => {
+    try {
+        console.log('Fetching menu items...');
+        
+        // First, check if we can connect to the database
+        const dbState = mongoose.connection.readyState;
+        console.log('Database connection state:', dbState);
+        
+        // Count total documents
+        const totalItems = await MenuItem.countDocuments();
+        console.log('Total menu items in database:', totalItems);
+        
+        const menuItems = await MenuItem.find({ isAvailable: true });
+        console.log('Found available menu items:', menuItems.length);
+        
+        if (menuItems.length === 0) {
+            console.log('No menu items found. Checking if database is empty...');
+            const allItems = await MenuItem.find({});
+            console.log('All items in database:', allItems);
+        }
+        
+        // Group items by category
+        const menuByCategory = menuItems.reduce((acc, item) => {
+            if (!acc[item.category]) {
+                acc[item.category] = [];
+            }
+            acc[item.category].push(item);
+            return acc;
+        }, {});
+
+        // Create a mapping of category names to their URL-friendly IDs
+        const categoryIds = {
+            'Beef': 'beef',
+            'Chicken & Fish': 'chicken-&-fish',
+            'Crispy Chicken': 'crispy-chicken',
+            'Breakfast': 'breakfast',
+            'Fries & Sides': 'fries-&-sides',
+            'Happy Meal': 'happy-meal',
+            'Beverages': 'beverages',
+            'Desserts': 'desserts',
+            'McCafé': 'mccafé',
+            'Value Meals': 'value-meals',
+            'Extra Value Meals': 'value-meals',
+            'Wraps': 'wraps'
+        };
+
+        console.log('Categories:', Object.keys(menuByCategory));
+        console.log('Menu by category:', JSON.stringify(menuByCategory, null, 2));
+
+        res.render('pages/menu', {
+            title: 'Our Menu',
+            isAuthPage: false,
+            menuByCategory,
+            categories: Object.keys(menuByCategory),
+            categoryIds
+        });
+    } catch (error) {
+        console.error('Error fetching menu:', error);
+        res.status(500).render('error', {
+            message: 'Error loading menu items',
+            error: process.env.NODE_ENV === 'development' ? error : {}
+        });
+    }
 });
 
 router.get('/about-our-food', (req, res) => {
@@ -45,42 +105,43 @@ router.get('/family', (req, res) => {
     });
 });
 
-router.get('/cart', (req, res) => {
+// Protected routes - require authentication
+router.get('/cart', isAuthenticated, (req, res) => {
     res.render('pages/cart', {
         title: 'Cart',
         isAuthPage: false
     });
 });
 
-router.get('/trending-now', (req, res) => {
+router.get('/trending-now', isAuthenticated, (req, res) => {
     res.render('pages/trending', {
         title: 'Trending Now',
         isAuthPage: false
     });
 });
 
-router.get('/contact-us', (req, res) => {
+router.get('/contact-us', isAuthenticated, (req, res) => {
     res.render('pages/contact-us', {
         title: 'Contact Us',
         isAuthPage: false
     });
 });
 
-router.get('/search', (req, res) => {
+router.get('/search', isAuthenticated, (req, res) => {
     res.render('pages/search', {
         title: 'Search',
         isAuthPage: false
     });
 });
 
-router.get('/locate-me', (req, res) => {
+router.get('/locate-me', isAuthenticated, (req, res) => {
     res.render('pages/locate-me', {
         title: 'Locate Me',
         isAuthPage: false
     });
 });
 
-router.get('/checkout', (req, res) => {
+router.get('/checkout', isAuthenticated, (req, res) => {
     res.render('pages/checkout', {
         title: 'Checkout',
         isAuthPage: false

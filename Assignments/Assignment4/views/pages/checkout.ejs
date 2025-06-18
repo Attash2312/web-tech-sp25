@@ -1,0 +1,242 @@
+<%- include('../partials/header') %>
+
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-8">Checkout</h1>
+
+    <!-- Order Summary -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <h2 class="text-2xl font-semibold mb-4">Order Summary</h2>
+        <div class="overflow-x-auto">
+            <table class="min-w-full">
+                <thead>
+                    <tr class="bg-gray-100">
+                        <th class="px-4 py-2 text-left">Product</th>
+                        <th class="px-4 py-2 text-center">Quantity</th>
+                        <th class="px-4 py-2 text-right">Price</th>
+                        <th class="px-4 py-2 text-right">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% cart.forEach(item => { %>
+                        <tr class="border-b">
+                            <td class="px-4 py-2"><%= item.name %></td>
+                            <td class="px-4 py-2 text-center"><%= item.quantity %></td>
+                            <td class="px-4 py-2 text-right">$<%= item.price.toFixed(2) %></td>
+                            <td class="px-4 py-2 text-right">$<%= (item.price * item.quantity).toFixed(2) %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+                <tfoot>
+                    <tr class="font-bold">
+                        <td colspan="3" class="px-4 py-2 text-right">Total:</td>
+                        <td class="px-4 py-2 text-right">$<%= total.toFixed(2) %></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <!-- Delivery Information -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-2xl font-semibold mb-4">Delivery Information</h2>
+        <form action="/cart/place-order" method="POST" class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                    <input type="text" id="name" name="name" required
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                </div>
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                </div>
+            </div>
+            <div>
+                <label for="address" class="block text-sm font-medium text-gray-700">Delivery Address</label>
+                <textarea id="address" name="address" rows="3" required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+            </div>
+            <div>
+                <label for="notes" class="block text-sm font-medium text-gray-700">Special Instructions (Optional)</label>
+                <textarea id="notes" name="notes" rows="2"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                    placeholder="Any special delivery instructions or preferences..."></textarea>
+            </div>
+            <div>
+                <label for="paymentMethod" class="block text-sm font-medium text-gray-700">Payment Method</label>
+                <select id="paymentMethod" name="paymentMethod" required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <option value="cash">Pay Later with Cash</option>
+                    <option value="card">Credit/Debit Card</option>
+                </select>
+            </div>
+            <div class="flex justify-between items-center pt-4">
+                <a href="/cart" class="text-indigo-600 hover:text-indigo-800">← Back to Cart</a>
+                <button type="submit"
+                    class="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    Place Order
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>
+
+<style>
+.container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
+}
+
+input:invalid, textarea:invalid {
+    border-color: #e74c3c;
+}
+
+input:invalid + .error-message,
+textarea:invalid + .error-message {
+    display: block;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+button {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: red;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('paymentForm');
+    const expiryDate = document.getElementById('expiryDate');
+
+    // Set minimum expiry date to current month
+    const today = new Date();
+    const minDate = today.toISOString().slice(0, 7);
+    expiryDate.setAttribute('min', minDate);
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        // Validate all fields
+        const isValid = validateForm();
+        
+        if (isValid) {
+            // Form is valid - process submission
+            alert('Order placed successfully!');
+            form.reset();
+        }
+    });
+
+    function validateForm() {
+        let isValid = true;
+        const fields = form.querySelectorAll('input, textarea');
+        
+        fields.forEach(field => {
+            if (!field.checkValidity()) {
+                showError(field);
+                isValid = false;
+            } else {
+                hideError(field);
+            }
+        });
+
+        // Additional custom validation for expiry date
+        if (expiryDate.value) {
+            const selectedDate = new Date(expiryDate.value);
+            if (selectedDate < today) {
+                showError(expiryDate, 'Please select a future date');
+                isValid = false;
+            }
+        }
+
+        return isValid;
+    }
+
+    function showError(field, customMessage = null) {
+        const errorMessage = field.nextElementSibling;
+        field.classList.add('invalid');
+        
+        if (customMessage) {
+            errorMessage.textContent = customMessage;
+        }
+        errorMessage.style.display = 'block';
+    }
+
+    function hideError(field) {
+        field.classList.remove('invalid');
+        const errorMessage = field.nextElementSibling;
+        errorMessage.style.display = 'none';
+    }
+
+    // Real-time validation on input change
+    form.querySelectorAll('input, textarea').forEach(field => {
+        field.addEventListener('input', function() {
+            if (this.checkValidity()) {
+                hideError(this);
+            }
+        });
+    });
+});
+</script> 

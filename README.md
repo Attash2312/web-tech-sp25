@@ -330,10 +330,4 @@ npm start
 - The application uses MongoDB - ensure it's running before starting the server
 - For production deployment, update environment variables and security settings
 
-## 🤝 Contributing
-
-This is a course project repository. For questions or issues, please contact the course instructor.
-
----
-
-**Built with ❤️ for Web Development Course SP25**
+**Built for Web Development Course SP25**
